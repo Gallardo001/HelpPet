@@ -37,10 +37,10 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
+import androidx.navigation.NavHostController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
@@ -48,13 +48,14 @@ import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.google.accompanist.pager.rememberPagerState
 import ex.gallardo.helppet.R
 import ex.gallardo.helppet.utils.Const
+import ex.gallardo.helppet.utils.WelcomeScreens
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(navController: NavHostController) {
     val pagerState = rememberPagerState(initialPage = 0)
     val scope = rememberCoroutineScope()
 
@@ -68,7 +69,7 @@ fun WelcomeScreen() {
         ) {
             LogoSection()
             CarouselCard(pagerState, modifier = Modifier.weight(2f))
-            CircleIndicatorSection(pagerState, scope)
+            CircleIndicatorSection(pagerState, scope, navController)
         }
     }
 }
@@ -91,7 +92,8 @@ private fun LogoSection() {
 @Composable
 private fun CircleIndicatorSection(
     pagerState: PagerState,
-    scope: CoroutineScope
+    scope: CoroutineScope,
+    navController: NavHostController
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -100,13 +102,17 @@ private fun CircleIndicatorSection(
     ) {
         CircleIndicatorItems(pagerState, scope)
 
-        Buttons(pagerState, scope)
+        Buttons(pagerState, scope, navController)
     }
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-private fun Buttons(pagerState: PagerState, scope: CoroutineScope) {
+private fun Buttons(
+    pagerState: PagerState,
+    scope: CoroutineScope,
+    navController: NavHostController
+) {
     val buttonText = if (pagerState.currentPage == 2) "Comenzar" else "Siguiente"
     Row {
         if (pagerState.currentPage != 0) {
@@ -138,6 +144,8 @@ private fun Buttons(pagerState: PagerState, scope: CoroutineScope) {
                                   pagerState.currentPage + 1
                               )
                           }
+                      }else{
+                          navController.navigate(WelcomeScreens.StartScreen.route)
                       }
             },
             colors = ButtonDefaults.buttonColors(
@@ -224,10 +232,4 @@ private fun CarouselCard(pagerState: PagerState, modifier: Modifier) {
             }
         }
     }
-}
-
-@Preview(showSystemUi = true)
-@Composable
-fun WelcomeScreenPreview() {
-    WelcomeScreen()
 }

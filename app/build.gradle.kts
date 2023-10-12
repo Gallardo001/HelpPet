@@ -60,8 +60,12 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+
+    //Navigation Compose
+    implementation("androidx.navigation:navigation-compose:2.5.3")
+
     //Pager
-    implementation("com.google.accompanist:accompanist-pager:0.27.1")
+    implementation("com.google.accompanist:accompanist-pager:0.28.0")
     implementation("androidx.compose.ui:ui-util")
 
     //Test
