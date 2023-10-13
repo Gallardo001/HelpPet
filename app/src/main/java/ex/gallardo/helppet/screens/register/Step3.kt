@@ -20,8 +20,9 @@ import ex.gallardo.helppet.components.TitleBold
 fun Step3(modifier: Modifier = Modifier) {
     var value by remember { mutableStateOf("") }
     Column (
-        modifier = Modifier
-            ,horizontalAlignment = Alignment.CenterHorizontally) {
+        modifier = Modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Title(text = "Informacion")
         TitleBold(text = "General")
         Spacer(modifier = Modifier.height(30.dp))

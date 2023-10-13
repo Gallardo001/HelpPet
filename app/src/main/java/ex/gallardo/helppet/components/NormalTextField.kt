@@ -14,11 +14,11 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NormalTextField(value: String, placeHolder: String,onValueChange: (String) -> Unit) {
+fun NormalTextField(modifier: Modifier = Modifier,value: String, placeHolder: String,onValueChange: (String) -> Unit) {
     TextField(
         value = value,
         onValueChange = onValueChange,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .border(2.dp, Color(0xFF2882f1), RoundedCornerShape(10.dp)),
         colors = TextFieldDefaults.textFieldColors(

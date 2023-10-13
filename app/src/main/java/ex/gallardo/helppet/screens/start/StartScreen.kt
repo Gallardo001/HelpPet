@@ -17,50 +17,51 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import ex.gallardo.helppet.R
+import ex.gallardo.helppet.utils.WelcomeScreens
 
 @Composable
-fun StartScreen() {
-Column (
-    horizontalAlignment = Alignment.CenterHorizontally,
+fun StartScreen(navController: NavController) {
+    Column (
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
             .padding(top = 40.dp).padding(horizontal = 40.dp)
-
-
-) {
-     Image(
-         painter = painterResource(id = R.drawable.logotipo),
-         contentDescription = "Logo"
-     )
-    Spacer(modifier = Modifier.height(60.dp))
-    Image(
-        painter = painterResource(id = R.drawable.illustrations_pets),
-        contentDescription = "Illustration")
-    Spacer(modifier = Modifier.height(65.dp))
-    Button(onClick =  { /*TODO*/ }, colors = ButtonDefaults.buttonColors(
-    containerColor = Color(0xFF2882f1)
-    ),modifier = Modifier.fillMaxWidth()
     ) {
-        Text(
-            text = "Iniciar Sesión",
+        Image(
+            painter = painterResource(id = R.drawable.logotipo),
+            contentDescription = "Logo"
+        )
+        Spacer(modifier = Modifier.height(60.dp))
+        Image(
+            painter = painterResource(id = R.drawable.illustrations_pets),
+            contentDescription = "Illustration")
+        Spacer(modifier = Modifier.height(65.dp))
+        Button(
+            onClick =  {
 
-        )
+            },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF2882f1)
+            ),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = "Iniciar Sesión")
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        OutlinedButton(
+            onClick = {
+                navController.navigate(WelcomeScreens.RegisterScreen.route)
+                      },
+            modifier = Modifier.fillMaxWidth(),
+            border = BorderStroke(1.dp, Color(0xFF2882f1))
+        ) {
+            Text(
+                text = "Registrarse",
+                color = Color(0xFF2882f1)
+            )
+        }
     }
-    Spacer(modifier = Modifier.height(10.dp))
-    OutlinedButton(onClick = { /*TODO*/ }, modifier = Modifier.fillMaxWidth(),
-        border = BorderStroke(1.dp, Color(0xFF2882f1))) {
-        Text(
-            text = "Registrarse",
-            color = Color(0xFF2882f1)
-        )
-    }
-}
-}
-@Preview (showSystemUi = true)
-@Composable
-fun StartScreenPreview() {
-    StartScreen()
 }
