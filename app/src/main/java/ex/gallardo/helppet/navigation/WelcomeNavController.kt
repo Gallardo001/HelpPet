@@ -9,12 +9,16 @@ import ex.gallardo.helppet.screens.register.RegisterScreen
 import ex.gallardo.helppet.screens.start.StartScreen
 import ex.gallardo.helppet.screens.welcome.WelcomeScreen
 import ex.gallardo.helppet.utils.WelcomeScreens
+import ex.gallardo.helppet.viewmodels.UserViewModel
 
 @Composable
-fun WelcomeNavController(navController: NavHostController) {
+fun WelcomeNavController(
+    navController: NavHostController,
+    userViewModel: UserViewModel
+) {
     NavHost(
         navController = navController,
-        startDestination = WelcomeScreens.WelcomeScreen.route
+        startDestination = WelcomeScreens.WelcomeScreen.route,
     ) {
         composable(WelcomeScreens.WelcomeScreen.route) {
             WelcomeScreen(navController)
@@ -23,7 +27,7 @@ fun WelcomeNavController(navController: NavHostController) {
             StartScreen(navController)
         }
         composable(WelcomeScreens.RegisterScreen.route) {
-            RegisterScreen(navController)
+            RegisterScreen(navController, userViewModel)
         }
         composable(WelcomeScreens.LoginScreen.route) {
             LoginScreen(navController)

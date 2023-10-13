@@ -17,8 +17,11 @@ import ex.gallardo.helppet.components.Title
 import ex.gallardo.helppet.components.TitleBold
 
 @Composable
-fun Step1(modifier: Modifier = Modifier) {
-    var value by remember { mutableStateOf("") }
+fun Step1(
+    modifier: Modifier = Modifier,
+    value: String ,
+    onValueChange: (String) -> Unit
+) {
     Column (
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -29,14 +32,8 @@ fun Step1(modifier: Modifier = Modifier) {
             NormalTextField(
                 value = value ,
                 placeHolder = "Correo Electrónico",
-                onValueChange = { value = it }
+                onValueChange = onValueChange
             )
     }
 
-}
-
-@Preview(showSystemUi = true)
-@Composable
-fun Step1Preview() {
-    Step1()
 }

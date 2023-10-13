@@ -17,8 +17,13 @@ import ex.gallardo.helppet.components.Title
 import ex.gallardo.helppet.components.TitleBold
 
 @Composable
-fun Step2(modifier: Modifier = Modifier) {
-    var value by remember { mutableStateOf("") }
+fun Step2(
+    modifier: Modifier = Modifier,
+    password: String,
+    confirmPassword: String,
+    onPasswordChange: (String) -> Unit,
+    onConfirmPasswordChange: (String) -> Unit
+) {
     var hidden  by remember { mutableStateOf(true) }
     Column (
         modifier = modifier,
@@ -29,25 +34,19 @@ fun Step2(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(30.dp))
 
         PasswordTextField(
-            value = value,
+            value = password,
             placeHolder = "Contraseña",
             hidden = hidden,
             onClick = { hidden = !hidden },
-            onValueChange = { value = it }
+            onValueChange = onPasswordChange
         )
         Spacer(modifier = Modifier.height(30.dp))
     PasswordTextField(
-        value = value,
+        value = confirmPassword,
         placeHolder = "Confirmar Contraseña",
         hidden = hidden,
         onClick = { hidden = !hidden },
-        onValueChange ={ value = it }
+        onValueChange =onConfirmPasswordChange
     )
     }
-}
-
-@Preview (showSystemUi = true)
-@Composable
-fun Step2Preview() {
-    Step2()
 }

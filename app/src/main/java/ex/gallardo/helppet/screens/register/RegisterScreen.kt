@@ -24,7 +24,11 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -42,6 +46,8 @@ import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.google.accompanist.pager.rememberPagerState
 import ex.gallardo.helppet.R
+import ex.gallardo.helppet.models.Pets
+import ex.gallardo.helppet.models.Users
 import ex.gallardo.helppet.screens.register.steps.Step1
 import ex.gallardo.helppet.screens.register.steps.Step2
 import ex.gallardo.helppet.screens.register.steps.Step3
@@ -49,15 +55,41 @@ import ex.gallardo.helppet.screens.register.steps.Step4
 import ex.gallardo.helppet.screens.register.steps.Step5
 import ex.gallardo.helppet.utils.Const
 import ex.gallardo.helppet.utils.WelcomeScreens
+import ex.gallardo.helppet.viewmodels.UserViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
-fun RegisterScreen(navController: NavHostController) {
+fun RegisterScreen(navController: NavHostController, userViewModel: UserViewModel) {
     val pagerState = rememberPagerState(initialPage = 0)
     val scope = rememberCoroutineScope()
+
+    var correo by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
+    var nameUser by remember { mutableStateOf("") }
+    var namePet by remember { mutableStateOf("") }
+    var raza by remember { mutableStateOf("") }
+    var especie by remember { mutableStateOf("") }
+    var peso by remember { mutableStateOf("") }
+    var color by remember { mutableStateOf("") }
+
+    val user = Users(
+        name = nameUser,
+        email = correo,
+        password = password,
+        petName = namePet
+    )
+
+    val pet = Pets(
+        name = namePet,
+        race = raza,
+        weight = peso,
+        color = color
+    )
+
 
    Scaffold {paddingValues ->
        Column (
@@ -73,15 +105,64 @@ fun RegisterScreen(navController: NavHostController) {
            Spacer(modifier = Modifier.height(10.dp))
            StepsSection(pagerState)
            Spacer(modifier = Modifier.height(10.dp))
-           OnBoardingEffect(pagerState, modifier = Modifier.weight(1f))
-           Buttons(pagerState = pagerState, scope = scope , navController = navController )
+           OnBoardingEffect(
+               pagerState = pagerState,
+               modifier = Modifier.weight(1f),
+               correo = correo,
+               onEmailChange = { correo = it },
+               password = password,
+               confirmPassword = confirmPassword,
+               onPasswordChange = { password = it },
+               onConfirmPasswordChange = { confirmPassword = it },
+               nameUser = nameUser,
+               onNameUserChange = { nameUser = it },
+               namePet = namePet,
+               onNamePetChange = { namePet = it },
+               raza = raza,
+               onRazaChange = { raza = it },
+               especie = especie,
+               onEspecieChange = { especie = it },
+               peso = peso,
+               onPesoChange = { peso = it },
+               color = color,
+               onColorChange = { color = it }
+           )
+           Buttons(
+               pagerState = pagerState,
+               scope = scope ,
+               navController = navController ,
+               userViewModel = userViewModel,
+               users = user,
+               pets = pet
+           )
        }
    }
 }
 
 @Composable
 @OptIn(ExperimentalPagerApi::class)
-private fun OnBoardingEffect(pagerState: PagerState, modifier: Modifier = Modifier) {
+private fun OnBoardingEffect(
+    pagerState: PagerState,
+    modifier: Modifier = Modifier,
+    correo: String,
+    onEmailChange: (String) -> Unit,
+    password: String,
+    confirmPassword: String,
+    onPasswordChange: (String) -> Unit,
+    onConfirmPasswordChange: (String) -> Unit,
+    nameUser: String,
+    onNameUserChange: (String) -> Unit,
+    namePet: String,
+    onNamePetChange: (String) -> Unit,
+    raza: String,
+    onRazaChange: (String) -> Unit,
+    especie: String,
+    onEspecieChange: (String) -> Unit,
+    peso: String,
+    onPesoChange: (String) -> Unit,
+    color: String,
+    onColorChange: (String) -> Unit
+) {
     HorizontalPager(
         count = Const.steps.size,
         state = pagerState,
@@ -107,15 +188,28 @@ private fun OnBoardingEffect(pagerState: PagerState, modifier: Modifier = Modifi
         ) {
             when (Const.steps[page]) {
                 "Step 1" -> {
-                    Step1()
+                    Step1(
+                        value = correo,
+                        onValueChange = onEmailChange
+                    )
                 }
 
                 "Step 2" -> {
-                    Step2()
+                    Step2(
+                        password = password,
+                        confirmPassword = confirmPassword,
+                        onPasswordChange = onPasswordChange,
+                        onConfirmPasswordChange = onConfirmPasswordChange
+                    )
                 }
 
                 "Step 3" -> {
-                    Step3()
+                    Step3(
+                        nameUser = nameUser,
+                        namePet = namePet,
+                        onNameUserChange = onNameUserChange,
+                        onNamePetChange = onNamePetChange
+                    )
                 }
 
                 "Step 4" -> {
@@ -123,7 +217,16 @@ private fun OnBoardingEffect(pagerState: PagerState, modifier: Modifier = Modifi
                 }
 
                 "Step 5" -> {
-                    Step5()
+                    Step5(
+                        raza = raza,
+                        especie = especie,
+                        peso = peso,
+                        color = color,
+                        onRazaChange = onRazaChange,
+                        onEspecieChange = onEspecieChange,
+                        onPesoChange = onPesoChange,
+                        onColorChange = onColorChange
+                    )
                 }
             }
         }
@@ -227,7 +330,10 @@ private fun ImageSection() {
 private fun Buttons(
     pagerState: PagerState,
     scope: CoroutineScope,
-    navController: NavHostController
+    navController: NavHostController,
+    userViewModel: UserViewModel,
+    users: Users,
+    pets: Pets
 ) {
     val buttonText = if (pagerState.currentPage == 4)  "Registrarse ya!!" else "Siguiente"
     Row {
@@ -258,6 +364,8 @@ private fun Buttons(
                         )
                     }
                 }else{
+                    userViewModel.insertUser(users)
+                    userViewModel.insertPet(pets)
                     navController.navigate(WelcomeScreens.StartScreen.route)
                 }
             },

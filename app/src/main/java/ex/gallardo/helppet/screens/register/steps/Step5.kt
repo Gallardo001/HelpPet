@@ -6,10 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,11 +15,17 @@ import ex.gallardo.helppet.components.Title
 import ex.gallardo.helppet.components.TitleBold
 
 @Composable
-fun Step5() {
-    var raza by remember { mutableStateOf("") }
-    var especie by remember { mutableStateOf("") }
-    var peso by remember { mutableStateOf("") }
-    var color by remember { mutableStateOf("") }
+fun Step5(
+    raza: String ,
+    especie: String ,
+    peso: String ,
+    color: String ,
+    onRazaChange: (String) -> Unit ,
+    onEspecieChange: (String) -> Unit ,
+    onPesoChange: (String) -> Unit ,
+    onColorChange: (String) -> Unit
+) {
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -34,14 +36,14 @@ fun Step5() {
             NormalTextField(
                 value = raza ,
                 placeHolder = "Raza" ,
-                onValueChange = { raza = it },
+                onValueChange = onRazaChange,
                 modifier = Modifier.weight(1f)
             )
             Spacer(modifier = Modifier.width(10.dp))
             NormalTextField(
                 value = especie ,
                 placeHolder = "Especie" ,
-                onValueChange = { especie = it },
+                onValueChange = onEspecieChange,
                 modifier = Modifier.weight(1f)
             )
         }
@@ -50,22 +52,17 @@ fun Step5() {
             NormalTextField(
                 value = peso ,
                 placeHolder = "Peso" ,
-                onValueChange = { peso = it },
+                onValueChange = onPesoChange,
                 modifier = Modifier.weight(1f)
             )
             Spacer(modifier = Modifier.width(10.dp))
             NormalTextField(
                 value = color ,
                 placeHolder = "Color | pelaje" ,
-                onValueChange = { color = it },
+                onValueChange = onColorChange ,
                 modifier = Modifier.weight(1f)
             )
         }
     }
 }
 
-@Preview(showSystemUi = true)
-@Composable
-fun Step5Preview() {
-    Step5()
-}

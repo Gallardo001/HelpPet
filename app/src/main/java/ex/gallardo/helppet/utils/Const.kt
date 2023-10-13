@@ -6,15 +6,15 @@ object Const {
     val carouselItems = listOf(
         CarouselItem(
             image = R.drawable.illustrations_pets_shower,
-            text = "Lorem ipsum dolor sit amet consectetur. Netus phasellus pharetra duis urna urna"
+            text = "Con Helpets, ya no olvidarás las citas de tu mascota."
         )   ,
         CarouselItem(
             image = R.drawable.illustrations_pets_doctor,
-            text = "Lorem ipsum dolor sit amet consectetur. Netus phasellus pharetra duis urna urna"
+            text = "Helpets, te ayudará administrar   los datos médico de tu mascota."
         )  ,
         CarouselItem(
             image = R.drawable.illustrations_food_pets,
-            text = "Lorem ipsum dolor sit amet consectetur. Netus phasellus pharetra duis urna urna"
+            text = "Ya no olvidarás más en darles los medicamentos a tus mascotas con Helpets."
         )
     )
 
