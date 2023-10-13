@@ -20,7 +20,7 @@ import ex.gallardo.helppet.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PasswordTextField (value: String, placeHolder: String, hidden:Boolean, onClick : () -> Unit ,onValueChange: (String) -> Unit) {
+fun PasswordTextField(value: String, placeHolder: String, hidden:Boolean, onClick : () -> Unit ,onValueChange: (String) -> Unit) {
     TextField(
         value = value,
         onValueChange = onValueChange,

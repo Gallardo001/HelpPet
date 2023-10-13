@@ -38,7 +38,7 @@ fun RegisterScreen() {
            ImageSection()
            Spacer(modifier = Modifier.height(30.dp))
            StepsSection()
-
+           Spacer(modifier = Modifier.height(30.dp))
        }
    }
 }
