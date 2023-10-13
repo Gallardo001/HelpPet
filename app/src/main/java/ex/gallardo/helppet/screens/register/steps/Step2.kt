@@ -1,4 +1,4 @@
-package ex.gallardo.helppet.screens.register
+package ex.gallardo.helppet.screens.register.steps
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -12,31 +12,42 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ex.gallardo.helppet.components.NormalTextField
+import ex.gallardo.helppet.components.PasswordTextField
 import ex.gallardo.helppet.components.Title
 import ex.gallardo.helppet.components.TitleBold
 
 @Composable
-fun Step1(modifier: Modifier = Modifier) {
+fun Step2(modifier: Modifier = Modifier) {
     var value by remember { mutableStateOf("") }
+    var hidden  by remember { mutableStateOf(true) }
     Column (
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        Title(text = "Accede a tu")
-        TitleBold(text = "Correo Electrónico")
+        Title(text = "Ingrese su")
+        TitleBold(text = "Contraseña y Confirmela")
         Spacer(modifier = Modifier.height(30.dp))
-            NormalTextField(
-                value = value ,
-                placeHolder = "Correo Electrónico",
-                onValueChange = { value = it }
-            )
-    }
 
+        PasswordTextField(
+            value = value,
+            placeHolder = "Contraseña",
+            hidden = hidden,
+            onClick = { hidden = !hidden },
+            onValueChange = { value = it }
+        )
+        Spacer(modifier = Modifier.height(30.dp))
+    PasswordTextField(
+        value = value,
+        placeHolder = "Confirmar Contraseña",
+        hidden = hidden,
+        onClick = { hidden = !hidden },
+        onValueChange ={ value = it }
+    )
+    }
 }
 
-@Preview(showSystemUi = true)
+@Preview (showSystemUi = true)
 @Composable
-fun Step1Preview() {
-    Step1()
+fun Step2Preview() {
+    Step2()
 }

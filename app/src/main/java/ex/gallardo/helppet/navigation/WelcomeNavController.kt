@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import ex.gallardo.helppet.screens.login.LoginScreen
 import ex.gallardo.helppet.screens.register.RegisterScreen
 import ex.gallardo.helppet.screens.start.StartScreen
 import ex.gallardo.helppet.screens.welcome.WelcomeScreen
@@ -23,6 +24,9 @@ fun WelcomeNavController(navController: NavHostController) {
         }
         composable(WelcomeScreens.RegisterScreen.route) {
             RegisterScreen(navController)
+        }
+        composable(WelcomeScreens.LoginScreen.route) {
+            LoginScreen(navController)
         }
     }
 }

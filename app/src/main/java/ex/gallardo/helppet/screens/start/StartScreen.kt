@@ -41,7 +41,7 @@ fun StartScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(65.dp))
         Button(
             onClick =  {
-
+                navController.navigate(WelcomeScreens.LoginScreen.route)
             },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF2882f1)

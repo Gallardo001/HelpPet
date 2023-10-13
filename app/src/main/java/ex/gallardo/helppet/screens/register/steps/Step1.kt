@@ -1,4 +1,4 @@
-package ex.gallardo.helppet.screens.register
+package ex.gallardo.helppet.screens.register.steps
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,30 +17,26 @@ import ex.gallardo.helppet.components.Title
 import ex.gallardo.helppet.components.TitleBold
 
 @Composable
-fun Step3(modifier: Modifier = Modifier) {
+fun Step1(modifier: Modifier = Modifier) {
     var value by remember { mutableStateOf("") }
     Column (
-        modifier = Modifier,
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Title(text = "Informacion")
-        TitleBold(text = "General")
+    ){
+        Title(text = "Accede a tu")
+        TitleBold(text = "Correo Electrónico")
         Spacer(modifier = Modifier.height(30.dp))
-        NormalTextField(
-            value = value,
-            placeHolder = "Nombre del Dueño",
-            onValueChange = { value = it} )
-        Spacer(modifier = Modifier.height(30.dp))
-        NormalTextField(
-            value = value,
-            placeHolder = "Nombre de la Mascota",
-            onValueChange ={ value = it } )
-
+            NormalTextField(
+                value = value ,
+                placeHolder = "Correo Electrónico",
+                onValueChange = { value = it }
+            )
     }
+
 }
 
-@Preview (showSystemUi = true)
+@Preview(showSystemUi = true)
 @Composable
-fun Step3Preview() {
-    Step3()
+fun Step1Preview() {
+    Step1()
 }

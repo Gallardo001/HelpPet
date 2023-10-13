@@ -1,4 +1,4 @@
-package ex.gallardo.helppet.screens.register
+package ex.gallardo.helppet.screens.register.steps
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row

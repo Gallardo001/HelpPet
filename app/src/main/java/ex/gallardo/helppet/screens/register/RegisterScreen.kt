@@ -42,6 +42,11 @@ import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.google.accompanist.pager.rememberPagerState
 import ex.gallardo.helppet.R
+import ex.gallardo.helppet.screens.register.steps.Step1
+import ex.gallardo.helppet.screens.register.steps.Step2
+import ex.gallardo.helppet.screens.register.steps.Step3
+import ex.gallardo.helppet.screens.register.steps.Step4
+import ex.gallardo.helppet.screens.register.steps.Step5
 import ex.gallardo.helppet.utils.Const
 import ex.gallardo.helppet.utils.WelcomeScreens
 import kotlinx.coroutines.CoroutineScope
