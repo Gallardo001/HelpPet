@@ -17,26 +17,29 @@ import ex.gallardo.helppet.components.Title
 import ex.gallardo.helppet.components.TitleBold
 
 @Composable
-fun Step1(modifier: Modifier = Modifier) {
+fun Step3(modifier: Modifier = Modifier) {
     var value by remember { mutableStateOf("") }
     Column (
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ){
-        Title(text = "Accede a tu")
-        TitleBold(text = "Correo Electrónico")
+        modifier = Modifier
+            ,horizontalAlignment = Alignment.CenterHorizontally) {
+        Title(text = "Informacion")
+        TitleBold(text = "General")
         Spacer(modifier = Modifier.height(30.dp))
-            NormalTextField(
-                value = value ,
-                placeHolder = "Correo Electrónico",
-                onValueChange = { value = it }
-            )
-    }
+        NormalTextField(
+            value = value,
+            placeHolder = "Nombre del Dueño",
+            onValueChange = { value = it} )
+        Spacer(modifier = Modifier.height(30.dp))
+        NormalTextField(
+            value = value,
+            placeHolder = "Nombre de la Mascota",
+            onValueChange ={ value = it } )
 
+    }
 }
 
-@Preview(showSystemUi = true)
+@Preview (showSystemUi = true)
 @Composable
-fun Step1Preview() {
-    Step1()
+fun Step3Preview() {
+    Step3()
 }
